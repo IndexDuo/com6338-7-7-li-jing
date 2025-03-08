@@ -76,6 +76,8 @@ function showQuestions() {
             // console.log(questionAnswer);
             if (choice == questionAnswer) {
                 console.log(choice + " is correct");
+                questionNumber++;
+                showQuestions();
             }
         });
     });
