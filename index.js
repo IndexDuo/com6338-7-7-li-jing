@@ -61,7 +61,18 @@ startButton.addEventListener("click", showQuestions);
 function showQuestions() {
     console.log("clicked");
     timer = 30;
-    startTimer();
+    const intervalId = setInterval(function () {
+        timerPara.textContent = timer;
+
+        console.log("timer:", timer);
+        timerPara.textContent = timer;
+
+        if (timer <= 0) {
+            clearInterval(intervalId); // Stop after 5 iterations
+            console.log("Interval stopped.");
+        }
+        timer--;
+    }, 1000);
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
     if (questionNumber < questionsArr.length) {
@@ -94,21 +105,6 @@ function showQuestions() {
     }
 
     quizDiv.append(questionPara, answerDiv, timerPara);
-
-    function startTimer() {
-        setInterval(function () {
-            timerPara.textContent = timer;
-
-            console.log("timer:", timer);
-            timerPara.textContent = timer;
-
-            if (timer <= 0) {
-                clearInterval(); // Stop after 5 iterations
-                console.log("Interval stopped.");
-            }
-            timer--;
-        }, 1000);
-    }
 
     // questionsArr.forEach((quiz) => {
     //     // console.log(quiz.question);
