@@ -49,7 +49,7 @@ var answerDiv = document.createElement("div");
 var answerButton = document.createElement("button");
 var timerPara = document.createElement("p");
 var timer = 30;
-var score;
+var correct = 0;
 var questionNumber = 0;
 var questionAnswer = questionsArr[questionNumber].answer;
 startButton.textContent = "Start Quiz!";
@@ -77,12 +77,14 @@ function showQuestions() {
                 if (choice == questionAnswer) {
                     console.log(choice + " is correct");
                     questionNumber++;
+                    correct++;
                     showQuestions();
                 }
             });
         });
     } else {
-        questionPara.textContent
+        var score = (correct/questionsArr.length)*100
+        questionPara.textContent = `${score}%`;
     }
 
     quizDiv.append(questionPara, answerDiv, timerPara);
