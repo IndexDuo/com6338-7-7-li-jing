@@ -61,11 +61,12 @@ function showQuestions() {
     quizDiv.innerHTML = "";
     for (i = 0; i < questionsArr.length; i++) {
         questionPara.textContent = questionsArr[i].question;
-        // quiz.options.forEach((choices) => {
-        //     // console.log(choices);
-        //     answerButton.textContent = choices;
-        //     answerDiv.appendChild(answerButton);
-        // });
+        questionsArr[i].options.forEach((choices) => {
+            console.log(choices);
+            answerButton = document.createElement("button");
+            answerButton.textContent = choices;
+            answerDiv.appendChild(answerButton);
+        });
         quizDiv.append(questionPara, answerDiv, timerPara);
     }
     // questionsArr.forEach((quiz) => {
