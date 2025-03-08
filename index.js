@@ -51,6 +51,7 @@ var timerPara = document.createElement("p");
 var timer = 30;
 var score;
 var questionNumber = 0;
+var questionAnswer = questionsArr[questionNumber].answer;
 startButton.textContent = "Start Quiz!";
 quizDiv.appendChild(startButton);
 
@@ -63,8 +64,8 @@ function showQuestions() {
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
     questionPara.textContent = questionsArr[questionNumber].question;
-    var questionAnswer = questionsArr[i].answer;
-    questionsArr[i].options.forEach((choice) => {
+    questionAnswer = questionsArr[questionNumber].answer;
+    questionsArr[questionNumber].options.forEach((choice) => {
         // console.log(choice);
 
         answerButton = document.createElement("button");
@@ -72,9 +73,9 @@ function showQuestions() {
         answerDiv.appendChild(answerButton);
 
         answerButton.addEventListener("click", () => {
-            console.log(questionAnswer);
+            // console.log(questionAnswer);
             if (choice == questionAnswer) {
-                console.log(choice + "is correct");
+                console.log(choice + " is correct");
             }
         });
     });
