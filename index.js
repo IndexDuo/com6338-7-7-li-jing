@@ -44,6 +44,7 @@ var quizDiv = document.getElementById("quiz");
 console.log(quizDiv);
 
 var startButton = document.createElement("button");
+startButton.id = "start-quiz";
 var questionPara = document.createElement("p");
 var answerDiv = document.createElement("div");
 var answerButton = document.createElement("button");
