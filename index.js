@@ -60,6 +60,8 @@ quizDiv.appendChild(startButton);
 startButton.addEventListener("click", showQuestions);
 
 function showQuestions() {
+    quizDiv.innerHTML = "";
+    answerDiv.innerHTML = "";
     console.log("clicked");
     timer = 30;
     const intervalId = setInterval(function () {
@@ -75,8 +77,7 @@ function showQuestions() {
         }
         timer--;
     }, 1000);
-    quizDiv.innerHTML = "";
-    answerDiv.innerHTML = "";
+
     if (questionNumber < questionsArr.length) {
         questionPara.textContent = questionsArr[questionNumber].question;
         questionAnswer = questionsArr[questionNumber].answer;
