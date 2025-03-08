@@ -62,13 +62,15 @@ function showQuestions() {
     timer = 30;
     setInterval(function () {
         timerPara.textContent = timer;
-        
+
         console.log("timer:", timer);
         timerPara.textContent = timer;
+
         if (timer <= 0) {
             clearInterval(intervalId); // Stop after 5 iterations
             console.log("Interval stopped.");
         }
+        timer--;
     }, 1000);
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
