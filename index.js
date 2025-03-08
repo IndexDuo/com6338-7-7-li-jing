@@ -13,7 +13,7 @@ var questionsArr = [
     },
     {
         question:
-            " What is the longest that an elephant has ever lived? (That we know of)",
+            "What is the longest that an elephant has ever lived? (That we know of)",
         answer: "86 years",
         options: ["17 years", "49 years", "86 years", "142 years"],
     },
@@ -39,5 +39,8 @@ var questionsArr = [
     },
 ];
 
+var quizDiv = document.getElementById("quiz");
 
+console.log(quizDiv);
 
+quizDiv.setAttribute
