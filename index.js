@@ -107,7 +107,8 @@ function showQuestions() {
     } else {
         var score = (correct / questionsArr.length) * 100;
         questionPara.textContent = `${score}%`;
-        
+        quizDiv.appendChild(startButton);
+        localStorage.setItem("previous-score", score);
     }
 
     quizDiv.append(questionPara, answerDiv, timerPara);
