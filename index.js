@@ -47,7 +47,7 @@ var startButton = document.createElement("button");
 startButton.textContent = "Start Quiz!";
 quizDiv.appendChild(startButton);
 
-startButton.addEventListener("click", showQuestions());
+startButton.addEventListener("click", showQuestions);
 
 function showQuestions() {
     console.log("clicked");
