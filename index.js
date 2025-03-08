@@ -59,7 +59,6 @@ startButton.addEventListener("click", showQuestions);
 
 function showQuestions() {
     console.log("clicked");
-    score = 0;
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
     if (questionNumber < questionsArr.length) {
@@ -79,11 +78,14 @@ function showQuestions() {
                     questionNumber++;
                     correct++;
                     showQuestions();
+                } else {
                 }
+                questionNumber++;
+                showQuestions();
             });
         });
     } else {
-        var score = (correct/questionsArr.length)*100
+        var score = (correct / questionsArr.length) * 100;
         questionPara.textContent = `${score}%`;
     }
 
