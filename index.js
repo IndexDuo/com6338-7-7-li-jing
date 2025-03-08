@@ -51,4 +51,5 @@ startButton.addEventListener("click", showQuestions);
 
 function showQuestions() {
     console.log("clicked");
+    var timer = 30;
 }
