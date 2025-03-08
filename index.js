@@ -59,13 +59,13 @@ function showQuestions() {
     console.log("clicked");
 
     quizDiv.innerHTML = "";
-    for (i = 0; i < questionsArr.length; ) {
-        questionPara.textContent = quiz.question;
-        quiz.options.forEach((choices) => {
-            // console.log(choices);
-            answerButton.textContent = choices;
-            answerDiv.appendChild(answerButton);
-        });
+    for (i = 0; i < questionsArr.length; i++) {
+        questionPara.textContent = questionsArr[i].question;
+        // quiz.options.forEach((choices) => {
+        //     // console.log(choices);
+        //     answerButton.textContent = choices;
+        //     answerDiv.appendChild(answerButton);
+        // });
         quizDiv.append(questionPara, answerDiv, timerPara);
     }
     // questionsArr.forEach((quiz) => {
