@@ -61,11 +61,18 @@ function showQuestions() {
     quizDiv.innerHTML = "";
     for (i = 0; i < questionsArr.length; i++) {
         questionPara.textContent = questionsArr[i].question;
-        questionsArr[i].options.forEach((choices) => {
-            // console.log(choices);
+        questionsArr[i].options.forEach((choice) => {
+            // console.log(choice);
             answerButton = document.createElement("button");
-            answerButton.textContent = choices;
+            answerButton.textContent = choice;
             answerDiv.appendChild(answerButton);
+
+            answerButton.addEventListener("click", () => {
+                // console.log(choice);
+                if (choice === questionsArr[i].answer) {
+                    console.log(choice + "is correct");
+                }
+            });
         });
         quizDiv.append(questionPara, answerDiv, timerPara);
     }
