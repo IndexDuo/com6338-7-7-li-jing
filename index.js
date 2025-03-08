@@ -48,7 +48,7 @@ var questionPara = document.createElement("p");
 var answerDiv = document.createElement("div");
 var answerButton = document.createElement("button");
 var timerPara = document.createElement("p");
-var timer = 30;
+var timer;
 var correct = 0;
 var questionNumber = 0;
 var questionAnswer = questionsArr[questionNumber].answer;
@@ -59,11 +59,22 @@ startButton.addEventListener("click", showQuestions);
 
 function showQuestions() {
     console.log("clicked");
+    timer = 30;
+    setInterval(function () {
+        timer--;
+        console.log("timer:", timer);
+
+        if ((timer = 0)) {
+            clearInterval(intervalId); // Stop after 5 iterations
+            console.log("Interval stopped.");
+        }
+    }, 1000);
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
     if (questionNumber < questionsArr.length) {
         questionPara.textContent = questionsArr[questionNumber].question;
         questionAnswer = questionsArr[questionNumber].answer;
+
         questionsArr[questionNumber].options.forEach((choice) => {
             // console.log(choice);
 
