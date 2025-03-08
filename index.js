@@ -91,20 +91,23 @@ function showQuestions() {
 
             answerButton.addEventListener("click", () => {
                 // console.log(questionAnswer);
+                timer = 30;
                 if (choice == questionAnswer) {
                     console.log(choice + " is correct");
                     questionNumber++;
                     correct++;
                     showQuestions();
                 } else {
+                    questionNumber++;
+                    timer = 30;
+                    showQuestions();
                 }
-                questionNumber++;
-                showQuestions();
             });
         });
     } else {
         var score = (correct / questionsArr.length) * 100;
         questionPara.textContent = `${score}%`;
+        
     }
 
     quizDiv.append(questionPara, answerDiv, timerPara);
