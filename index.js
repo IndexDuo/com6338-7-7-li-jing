@@ -63,7 +63,7 @@ function showQuestions() {
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
     console.log("clicked");
-    timer = 30;
+    timer = 10;
     const intervalId = setInterval(function () {
         timerPara.textContent = timer;
 
@@ -72,7 +72,7 @@ function showQuestions() {
         if (timer <= 0) {
             clearInterval(intervalId); // Stop after 5 iterations
             console.log("Interval stopped.");
-            timer = 30;
+            // timer = 30;
             showQuestions();
         }
         timer--;
@@ -91,7 +91,7 @@ function showQuestions() {
 
             answerButton.addEventListener("click", () => {
                 // console.log(questionAnswer);
-                timer = 30;
+                timer = 0;
                 if (choice == questionAnswer) {
                     console.log(choice + " is correct");
                     questionNumber++;
