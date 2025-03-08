@@ -62,7 +62,7 @@ function showQuestions() {
     for (i = 0; i < questionsArr.length; i++) {
         questionPara.textContent = questionsArr[i].question;
         questionsArr[i].options.forEach((choices) => {
-            console.log(choices);
+            // console.log(choices);
             answerButton = document.createElement("button");
             answerButton.textContent = choices;
             answerDiv.appendChild(answerButton);
