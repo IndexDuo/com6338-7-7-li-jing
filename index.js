@@ -44,9 +44,11 @@ var quizDiv = document.getElementById("quiz");
 console.log(quizDiv);
 
 var startButton = document.createElement("button");
-var game
-
-
+var questionPara = document.createElement("p");
+var answerDiv = document.createElement("div");
+var answerButton = document.createElement("button");
+var timerPara = document.createElement("p");
+var timer = 30;
 
 startButton.textContent = "Start Quiz!";
 quizDiv.appendChild(startButton);
@@ -55,7 +57,16 @@ startButton.addEventListener("click", showQuestions);
 
 function showQuestions() {
     console.log("clicked");
-    quizDiv.innerHTML = "";
 
-    var timer = 30;
+    quizDiv.innerHTML = "";
+    questionsArr.forEach((quiz) => {
+        // console.log(quiz.question);
+        questionPara.textContent = quiz.question;
+        quiz.options.forEach((choices) => {
+            // console.log(choices);
+            answerButton.textContent = choices;
+            answerDiv.appendChild(answerButton);
+        });
+        quizDiv.append(questionPara, answerDiv, timerPara);
+    });
 }
