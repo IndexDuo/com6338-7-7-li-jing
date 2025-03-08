@@ -60,27 +60,30 @@ startButton.addEventListener("click", showQuestions);
 function showQuestions() {
     console.log("clicked");
     score = 0;
-
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
-    questionPara.textContent = questionsArr[questionNumber].question;
-    questionAnswer = questionsArr[questionNumber].answer;
-    questionsArr[questionNumber].options.forEach((choice) => {
-        // console.log(choice);
+    if (questionNumber < questionsArr.length) {
+        questionPara.textContent = questionsArr[questionNumber].question;
+        questionAnswer = questionsArr[questionNumber].answer;
+        questionsArr[questionNumber].options.forEach((choice) => {
+            // console.log(choice);
 
-        answerButton = document.createElement("button");
-        answerButton.textContent = choice;
-        answerDiv.appendChild(answerButton);
+            answerButton = document.createElement("button");
+            answerButton.textContent = choice;
+            answerDiv.appendChild(answerButton);
 
-        answerButton.addEventListener("click", () => {
-            // console.log(questionAnswer);
-            if (choice == questionAnswer) {
-                console.log(choice + " is correct");
-                questionNumber++;
-                showQuestions();
-            }
+            answerButton.addEventListener("click", () => {
+                // console.log(questionAnswer);
+                if (choice == questionAnswer) {
+                    console.log(choice + " is correct");
+                    questionNumber++;
+                    showQuestions();
+                }
+            });
         });
-    });
+    } else {
+        questionPara.textContent
+    }
 
     quizDiv.append(questionPara, answerDiv, timerPara);
 
