@@ -49,7 +49,7 @@ var answerDiv = document.createElement("div");
 var answerButton = document.createElement("button");
 var timerPara = document.createElement("p");
 var timer = 30;
-
+var score;
 startButton.textContent = "Start Quiz!";
 quizDiv.appendChild(startButton);
 
@@ -57,7 +57,7 @@ startButton.addEventListener("click", showQuestions);
 
 function showQuestions() {
     console.log("clicked");
-
+    score = 0;
     for (i = 0; i < questionsArr.length; i++) {
         quizDiv.innerHTML = "";
         answerDiv.innerHTML = "";
