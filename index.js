@@ -1,5 +1,3 @@
-// Your code here
-
 var questionsArr = [
     {
         question: "Who created JavaScript?",
@@ -12,8 +10,7 @@ var questionsArr = [
         ],
     },
     {
-        question:
-            "What is the longest that an elephant has ever lived? (That we know of)",
+        question: "What is the longest that an elephant has ever lived? (That we know of)",
         answer: "86 years",
         options: ["17 years", "49 years", "86 years", "142 years"],
     },
@@ -47,13 +44,12 @@ var startButton = document.createElement("button");
 startButton.id = "start-quiz";
 var questionPara = document.createElement("p");
 var answerDiv = document.createElement("div");
-var answerButton = document.createElement("button");
 var timerPara = document.createElement("p");
 var timer;
 var correct = 0;
 var questionNumber = 0;
+var intervalId; // Store interval globally to clear it properly
 
-var questionAnswer = questionsArr[questionNumber].answer;
 startButton.textContent = "Start Quiz!";
 quizDiv.appendChild(startButton);
 
@@ -62,17 +58,21 @@ startButton.addEventListener("click", showQuestions);
 function showQuestions() {
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
-    console.log("clicked");
-    timer = 10;
-    const intervalId = setInterval(function () {
-        timerPara.textContent = timer;
 
+    console.log("clicked");
+    timer = 30;
+
+    // Clear any existing interval before starting a new one
+    clearInterval(intervalId);
+
+    intervalId = setInterval(function () {
+        timerPara.textContent = timer;
         console.log("timer:", timer);
 
         if (timer <= 0) {
-            clearInterval(intervalId); // Stop after 5 iterations
+            clearInterval(intervalId); // Stop the timer when it reaches 0
             console.log("Interval stopped.");
-            // timer = 30;
+            questionNumber++;
             showQuestions();
         }
         timer--;
@@ -80,41 +80,44 @@ function showQuestions() {
 
     if (questionNumber < questionsArr.length) {
         questionPara.textContent = questionsArr[questionNumber].question;
-        questionAnswer = questionsArr[questionNumber].answer;
+        let questionAnswer = questionsArr[questionNumber].answer;
 
         questionsArr[questionNumber].options.forEach((choice) => {
-            // console.log(choice);
-
-            answerButton = document.createElement("button");
+            let answerButton = document.createElement("button");
             answerButton.textContent = choice;
             answerDiv.appendChild(answerButton);
 
             answerButton.addEventListener("click", () => {
-                // console.log(questionAnswer);
-                timer = 0;
+                clearInterval(intervalId); // Stop current timer
+                timer = 30; // Reset the timer for the next question
+
                 if (choice == questionAnswer) {
                     console.log(choice + " is correct");
-                    questionNumber++;
                     correct++;
-                    showQuestions();
-                } else {
-                    questionNumber++;
-                    timer = 30;
-                    showQuestions();
                 }
+                questionNumber++;
+                showQuestions();
             });
         });
     } else {
+        clearInterval(intervalId); // Stop timer when quiz ends
         var score = (correct / questionsArr.length) * 100;
-        questionPara.textContent = `${score}%`;
-        quizDiv.appendChild(startButton);
+        quizDiv.innerHTML = `<p>Your score: ${score}%</p>`;
+
+        // Restart button
+        var restartButton = document.createElement("button");
+        restartButton.id = "start-quiz";
+        restartButton.textContent = "Start Quiz!";
+        restartButton.addEventListener("click", () => {
+            questionNumber = 0;
+            correct = 0;
+            showQuestions();
+        });
+
+        quizDiv.appendChild(restartButton);
+
         localStorage.setItem("previous-score", score);
     }
 
     quizDiv.append(questionPara, answerDiv, timerPara);
-
-    // questionsArr.forEach((quiz) => {
-    //     // console.log(quiz.question);
-
-    // });
 }
