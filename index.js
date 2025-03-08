@@ -50,6 +50,7 @@ var answerButton = document.createElement("button");
 var timerPara = document.createElement("p");
 var timer = 30;
 var score;
+var questionNumber = 0;
 startButton.textContent = "Start Quiz!";
 quizDiv.appendChild(startButton);
 
@@ -58,28 +59,28 @@ startButton.addEventListener("click", showQuestions);
 function showQuestions() {
     console.log("clicked");
     score = 0;
-    for (i = 0; i < questionsArr.length; i++) {
-        quizDiv.innerHTML = "";
-        answerDiv.innerHTML = "";
-        questionPara.textContent = questionsArr[i].question;
-        var questionAnswer = questionsArr[i].answer;
-        questionsArr[i].options.forEach((choice) => {
-            // console.log(choice);
 
-            answerButton = document.createElement("button");
-            answerButton.textContent = choice;
-            answerDiv.appendChild(answerButton);
+    quizDiv.innerHTML = "";
+    answerDiv.innerHTML = "";
+    questionPara.textContent = questionsArr[questionNumber].question;
+    var questionAnswer = questionsArr[i].answer;
+    questionsArr[i].options.forEach((choice) => {
+        // console.log(choice);
 
-            answerButton.addEventListener("click", () => {
-                console.log(questionAnswer);
-                if (choice == questionAnswer) {
-                    console.log(choice + "is correct");
-                }
-            });
+        answerButton = document.createElement("button");
+        answerButton.textContent = choice;
+        answerDiv.appendChild(answerButton);
+
+        answerButton.addEventListener("click", () => {
+            console.log(questionAnswer);
+            if (choice == questionAnswer) {
+                console.log(choice + "is correct");
+            }
         });
+    });
 
-        quizDiv.append(questionPara, answerDiv, timerPara);
-    }
+    quizDiv.append(questionPara, answerDiv, timerPara);
+
     // questionsArr.forEach((quiz) => {
     //     // console.log(quiz.question);
 
