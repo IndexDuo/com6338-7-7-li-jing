@@ -70,6 +70,7 @@ function showQuestions() {
         if (timer <= 0) {
             clearInterval(intervalId); // Stop after 5 iterations
             console.log("Interval stopped.");
+            showQuestions();
         }
         timer--;
     }, 1000);
