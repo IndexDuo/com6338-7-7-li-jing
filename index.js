@@ -59,8 +59,7 @@ function showQuestions() {
     console.log("clicked");
 
     quizDiv.innerHTML = "";
-    questionsArr.forEach((quiz) => {
-        // console.log(quiz.question);
+    for (i = 0; i < questionsArr.length; ) {
         questionPara.textContent = quiz.question;
         quiz.options.forEach((choices) => {
             // console.log(choices);
@@ -68,5 +67,9 @@ function showQuestions() {
             answerDiv.appendChild(answerButton);
         });
         quizDiv.append(questionPara, answerDiv, timerPara);
-    });
+    }
+    // questionsArr.forEach((quiz) => {
+    //     // console.log(quiz.question);
+
+    // });
 }
