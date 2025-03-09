@@ -10,7 +10,8 @@ var questionsArr = [
         ],
     },
     {
-        question: "What is the longest that an elephant has ever lived? (That we know of)",
+        question:
+            "What is the longest that an elephant has ever lived? (That we know of)",
         answer: "86 years",
         options: ["17 years", "49 years", "86 years", "142 years"],
     },
@@ -38,86 +39,101 @@ var questionsArr = [
 
 var quizDiv = document.getElementById("quiz");
 
-console.log(quizDiv);
-
 var startButton = document.createElement("button");
 startButton.id = "start-quiz";
 var questionPara = document.createElement("p");
 var answerDiv = document.createElement("div");
 var timerPara = document.createElement("p");
+
 var timer;
 var correct = 0;
 var questionNumber = 0;
-var intervalId; // Store interval globally to clear it properly
+var intervalId;
+var score;
 
-startButton.textContent = "Start Quiz!";
-quizDiv.appendChild(startButton);
+function newGame() {
+    quizDiv.innerHTML = "";
 
-startButton.addEventListener("click", showQuestions);
+    if (score) {
+        var scorePara = document.createElement("p");
+        scorePara.textContent = `Previous Score: ${score}%`;
+        quizDiv.appendChild(scorePara);
+    }
+
+    startButton.textContent = "Start Quiz!";
+    quizDiv.appendChild(startButton);
+
+    startButton.onclick = function () {
+        questionNumber = 0;
+        correct = 0;
+        showQuestions();
+    };
+}
 
 function showQuestions() {
     quizDiv.innerHTML = "";
     answerDiv.innerHTML = "";
+    clearInterval(intervalId);
 
     console.log("clicked");
     timer = 30;
-
-    // Clear any existing interval before starting a new one
-    clearInterval(intervalId);
+    timerPara.textContent = timer;
 
     intervalId = setInterval(function () {
+        timer--;
         timerPara.textContent = timer;
+
         console.log("timer:", timer);
 
         if (timer <= 0) {
-            clearInterval(intervalId); // Stop the timer when it reaches 0
-            console.log("Interval stopped.");
-            questionNumber++;
-            showQuestions();
+            clearInterval(intervalId);
+            console.log("Time's up!");
+
+            if (questionNumber < questionsArr.length - 1) {
+                questionNumber++;
+                showQuestions();
+            } else {
+                setScore();
+                newGame();
+            }
         }
-        timer--;
     }, 1000);
 
     if (questionNumber < questionsArr.length) {
         questionPara.textContent = questionsArr[questionNumber].question;
-        let questionAnswer = questionsArr[questionNumber].answer;
+        var questionAnswer = questionsArr[questionNumber].answer;
 
         questionsArr[questionNumber].options.forEach((choice) => {
-            let answerButton = document.createElement("button");
+            var answerButton = document.createElement("button");
             answerButton.textContent = choice;
             answerDiv.appendChild(answerButton);
 
             answerButton.addEventListener("click", () => {
-                clearInterval(intervalId); // Stop current timer
-                timer = 30; // Reset the timer for the next question
-
+                clearInterval(intervalId);
                 if (choice == questionAnswer) {
                     console.log(choice + " is correct");
                     correct++;
                 }
-                questionNumber++;
-                showQuestions();
+                if (questionNumber < questionsArr.length - 1) {
+                    questionNumber++;
+                    showQuestions();
+                } else {
+                    setScore();
+                    newGame();
+                }
             });
         });
     } else {
-        clearInterval(intervalId); // Stop timer when quiz ends
-        var score = (correct / questionsArr.length) * 100;
-        quizDiv.innerHTML = `<p>Your score: ${score}%</p>`;
-
-        // Restart button
-        var restartButton = document.createElement("button");
-        restartButton.id = "start-quiz";
-        restartButton.textContent = "Start Quiz!";
-        restartButton.addEventListener("click", () => {
-            questionNumber = 0;
-            correct = 0;
-            showQuestions();
-        });
-
-        quizDiv.appendChild(restartButton);
-
-        localStorage.setItem("previous-score", score);
+        setScore();
+        newGame();
     }
 
     quizDiv.append(questionPara, answerDiv, timerPara);
 }
+
+function setScore() {
+    score = Math.round((correct / questionsArr.length) * 100);
+    localStorage.setItem("previous-score", score);
+}
+
+newGame();
